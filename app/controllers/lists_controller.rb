@@ -7,7 +7,6 @@ class ListsController < ApplicationController
     list_params = params[:list]
     @list = List.new list_name: list_params[:list_name]
     if @list.save
-      binding.pry
       redirect_to list_path(@list)
     else
       render :new
@@ -18,4 +17,20 @@ class ListsController < ApplicationController
     @list = List.find params[:id]
   end
 
+  def index
+    @lists = List.all
+  end
+
+  def edit
+    @list = List.find params[:id]
+  end
+
+  def update
+    @list = List.find params[:id]
+    if @list.update list_name: params[:list][:list_name]
+      redirect_to list_path(@list)
+    else
+      render :index
+    end
+  end
 end

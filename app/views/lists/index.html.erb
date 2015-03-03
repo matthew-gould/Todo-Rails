@@ -1,0 +1,7 @@
+<h1>Lists: </h1>
+<ul>
+<% @lists.each do |list| %>
+	<li>
+	<%= link_to list.list_name, edit_list_path(list.id) %>
+	</li>
+<% end %>
