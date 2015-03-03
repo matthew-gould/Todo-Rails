@@ -1,16 +1,19 @@
 class ItemsController < ApplicationController
   def new
-    @items = Item.new
+    @item = Item.new
   end
 
   def create
-    item_params = params[:item]
-    @item = Item.new(item_name: item_params[:item_name], item_due: item_params[:item_due],
-    item_completed?: item_params[:item_completed?])
+    list = List.find_or_create_by(list_name: params[:item][:list])
+   @item =list.items.new(item_name: params[:item][:item_name])
     if @item.save
-      redirect_to item_path(@item)
+      redirect_to items_path
     else
       render :new
     end
+  end
+
+  def index
+    @items = Item.all
   end
 end

@@ -20,17 +20,4 @@ class ListsController < ApplicationController
   def index
     @lists = List.all
   end
-
-  def edit
-    @list = List.find params[:id]
-  end
-
-  def update
-    @list = List.find params[:id]
-    if @list.update list_name: params[:list][:list_name]
-      redirect_to list_path(@list)
-    else
-      render :index
-    end
-  end
 end
